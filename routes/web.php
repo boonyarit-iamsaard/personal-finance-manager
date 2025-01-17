@@ -5,7 +5,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home')->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+// TODO: enable 'verified' middleware once we have a proper email verification flow
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::view('dashboard', 'dashboard')->name('dashboard');
+// });
+Route::middleware(['auth'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
 });
 
