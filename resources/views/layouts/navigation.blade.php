@@ -37,7 +37,7 @@
                             <button
                                 class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
                             >
-                                <div>{{ Auth::user()->name }}</div>
+                                <div>{{ auth()->user()->name }}</div>
 
                                 <div class="ms-1">
                                     <svg
@@ -60,10 +60,11 @@
                                 Profile
                             </x-dropdown-link>
 
-                            <!-- TODO: add access control to admin area -->
-                            <x-dropdown-link :href="route('filament.admin.pages.dashboard')">
-                                Admin Area
-                            </x-dropdown-link>
+                            @if (auth()->user()->hasAdministrativeAccess())
+                                <x-dropdown-link :href="route('filament.admin.pages.dashboard')">
+                                    Admin Area
+                                </x-dropdown-link>
+                            @endif
 
                             <!-- Authentication -->
                             <form
@@ -154,10 +155,11 @@
                         Profile
                     </x-responsive-nav-link>
 
-                    <!-- TODO: add access control to admin area -->
-                    <x-responsive-nav-link :href="route('filament.admin.pages.dashboard')">
-                        Admin Area
-                    </x-responsive-nav-link>
+                    @if (auth()->user()->hasAdministrativeAccess())
+                        <x-responsive-nav-link :href="route('filament.admin.pages.dashboard')">
+                            Admin Area
+                        </x-responsive-nav-link>
+                    @endif
 
                     <!-- Authentication -->
                     <form
