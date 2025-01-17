@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -33,6 +34,25 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'remember_token',
     ];
+
+    protected static function booted(): void
+    {
+        /**
+         * Create a default wallet for each new user.
+         *
+         * When a new user is registered, automatically create a "Cash" wallet
+         * to help them start managing their finances immediately.
+         */
+        static::created(function (User $user) {
+            $name = 'Cash';
+            $slug = Str::slug($name);
+
+            $user->wallets()->create([
+                'name' => $name,
+                'slug' => $slug,
+            ]);
+        });
+    }
 
     /**
      * @return HasMany<Wallet, covariant User>
