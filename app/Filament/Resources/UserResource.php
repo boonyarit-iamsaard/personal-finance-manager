@@ -14,6 +14,7 @@ use Filament\Support\Enums\IconPosition;
 use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -47,6 +48,10 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('image')
+                    ->label('')
+                    ->circular()
+                    ->defaultImageUrl(url('https://i.pravatar.cc/150')),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('email')
@@ -54,6 +59,8 @@ class UserResource extends Resource
                     ->icon(fn (User $record): string => $record->email_verified_at ? 'heroicon-o-check-badge' : '')
                     ->iconColor('success')
                     ->iconPosition(IconPosition::After),
+                TextColumn::make('role')
+                    ->badge(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
