@@ -1,0 +1,10 @@
+**/.git
+.env*
+/.git
+/dist
+/node_modules
+/public
+/vendor
+composer.lock
+composer.json
+package-lock.json

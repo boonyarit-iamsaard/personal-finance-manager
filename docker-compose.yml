@@ -1,0 +1,43 @@
+services:
+  mailpit:
+    container_name: personal-finance-manager-mailpit
+    image: axllent/mailpit
+    restart: unless-stopped
+    volumes:
+      - mailpitdata:/data
+    ports:
+      - '8025:8025'
+      - '1025:1025'
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+    networks:
+      - personal-finance-manager-network
+
+  mysql:
+    container_name: personal-finance-manager-mysql
+    image: mysql:8.0
+    restart: unless-stopped
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - personal-finance-manager-network
+
+volumes:
+  mailpitdata:
+    name: personal-finance-manager-mailpitdata
+  mysqldata:
+    name: personal-finance-manager-mysqldata
+
+networks:
+  personal-finance-manager-network:
+    name: personal-finance-manager
