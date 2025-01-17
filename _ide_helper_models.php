@@ -25,6 +25,8 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Wallet> $wallets
+ * @property-read int|null $wallets_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User newQuery()
@@ -38,6 +40,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereUserId($value)
+ */
+	class Wallet extends \Eloquent {}
 }
 
