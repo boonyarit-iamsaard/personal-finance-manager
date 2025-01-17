@@ -3,8 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,8 +14,26 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        if (app()->environment('local')) {
-            User::factory(10)->create();
+        $this->command->info('Start seeding database...');
+
+        $this->call([
+            AdminSeeder::class,
+        ]);
+
+        if (App::environment('local')) {
+            $factories = [
+                'users' => User::factory(10),
+            ];
+
+            foreach ($factories as $key => $factory) {
+                $this->command->info("Start seeding {$key}...");
+
+                $factory->create();
+
+                $this->command->info(Str::ucfirst($key) . ' seeded successfully');
+            }
         }
+
+        $this->command->info('Database seeded successfully');
     }
 }
