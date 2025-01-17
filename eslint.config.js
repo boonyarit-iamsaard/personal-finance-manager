@@ -12,7 +12,7 @@ export default [
         },
     },
     {
-        ignores: ['public/build/', 'vendor/'],
+        ignores: ['public/', 'vendor/'],
     },
     pluginJs.configs.recommended,
     {

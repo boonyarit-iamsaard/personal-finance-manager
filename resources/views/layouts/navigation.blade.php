@@ -60,6 +60,11 @@
                                 Profile
                             </x-dropdown-link>
 
+                            <!-- TODO: add access control to admin area -->
+                            <x-dropdown-link :href="route('filament.admin.pages.dashboard')">
+                                Admin Area
+                            </x-dropdown-link>
+
                             <!-- Authentication -->
                             <form
                                 method="POST"
@@ -147,6 +152,11 @@
                 <div class="mt-3 space-y-1">
                     <x-responsive-nav-link :href="route('profile.edit')">
                         Profile
+                    </x-responsive-nav-link>
+
+                    <!-- TODO: add access control to admin area -->
+                    <x-responsive-nav-link :href="route('filament.admin.pages.dashboard')">
+                        Admin Area
                     </x-responsive-nav-link>
 
                     <!-- Authentication -->
