@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Enums\Role;
+use Database\Factories\UserFactory;
+use Exception;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,9 +14,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
     /**
@@ -69,18 +74,19 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function hasAdministrativeAccess(): bool
     {
-        // FIXME: fix this phpstan issue with the backed enum
-        // @phpstan-ignore-next-line
         return $this->role === Role::ADMINISTRATOR;
     }
 
+    /**
+     * @throws Exception
+     */
     public function canAccessPanel(Panel $panel): bool
     {
         if ($panel->getId() === 'admin') {
             return $this->hasAdministrativeAccess();
         }
 
-        return false;
+        return true;
     }
 
     /**

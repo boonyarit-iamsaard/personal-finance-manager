@@ -43,8 +43,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent implements \Filament\Models\Contracts\FilamentUser, \Illuminate\Contracts\Auth\MustVerifyEmail {}
+	#[\AllowDynamicProperties]
+	class IdeHelperUser {}
 }
 
 namespace App\Models{
@@ -67,7 +69,9 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Wallet whereUserId($value)
+ * @mixin \Eloquent
  */
-	class Wallet extends \Eloquent {}
+	#[\AllowDynamicProperties]
+	class IdeHelperWallet {}
 }
 
