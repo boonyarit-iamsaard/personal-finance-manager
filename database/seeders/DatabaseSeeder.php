@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Start seeding database...');
 
         $this->call([
-            AdminSeeder::class,
             TransactionSeeder::class,
         ]);
 

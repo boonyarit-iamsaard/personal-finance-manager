@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -33,13 +34,16 @@ class UserFactory extends Factory
         $paddingLength = strlen((string) $this->count);
         $paddedSequence = str_pad((string) self::$totalCount, $paddingLength, '0', STR_PAD_LEFT);
 
-        $name = "User-{$paddedSequence}";
-        $email = "user-{$paddedSequence}@example.com";
+        $firstUser = self::$totalCount === 1;
+        $name = $firstUser ? 'Admin' : "User-{$paddedSequence}";
+        $email = $firstUser ? 'admin@example.com' : "user-{$paddedSequence}@example.com";
+        $role = $firstUser ? Role::ADMINISTRATOR->value : Role::USER->value;
 
         return [
             'name' => $name,
             'email' => $email,
             'email_verified_at' => now(),
+            'role' => $role,
             'password' => Hash::make(static::$password ?? 'password'),
             'remember_token' => Str::random(10),
         ];
