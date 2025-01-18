@@ -22,6 +22,9 @@
                         >
                             Dashboard
                         </x-nav-link>
+                        <x-nav-link :href="route('filament.finance.pages.dashboard')">
+                            Finance
+                        </x-nav-link>
                     @endauth
                 </div>
             </div>
@@ -138,6 +141,9 @@
                     :active="request()->routeIs('dashboard')"
                 >
                     Dashboard
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('filament.finance.pages.dashboard')">
+                    Finance
                 </x-responsive-nav-link>
             @endauth
         </div>
