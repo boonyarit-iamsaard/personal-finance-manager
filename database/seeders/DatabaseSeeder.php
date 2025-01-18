@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminSeeder::class,
+            TransactionSeeder::class,
         ]);
 
         if (App::environment('local')) {
