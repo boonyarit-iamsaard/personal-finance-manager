@@ -11,9 +11,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Wallet extends Model
 {
     protected $fillable = [
-        'user_id',
+        'icon',
         'name',
         'slug',
+        'user_id',
     ];
 
     /**

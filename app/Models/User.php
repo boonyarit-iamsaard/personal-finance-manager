@@ -58,6 +58,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
             $slug = Str::slug($name);
 
             $user->wallets()->create([
+                'icon' => 'tabler-pig-money',
                 'name' => $name,
                 'slug' => $slug,
             ]);

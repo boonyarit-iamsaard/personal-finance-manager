@@ -14,6 +14,7 @@ return new class extends Migration
             $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('slug');
+            $table->string('icon');
             $table->timestamps();
 
             $table->unique(['user_id', 'slug'], 'unique_user_wallet');

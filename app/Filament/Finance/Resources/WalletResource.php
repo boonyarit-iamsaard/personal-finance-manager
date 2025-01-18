@@ -14,6 +14,7 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -41,6 +42,8 @@ class WalletResource extends Resource
     {
         return $table
             ->columns([
+                IconColumn::make('icon')
+                    ->icon(fn (Wallet $record): string => $record->icon),
                 TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('created_at')

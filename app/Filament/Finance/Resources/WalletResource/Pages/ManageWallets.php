@@ -23,8 +23,9 @@ class ManageWallets extends ManageRecords
             CreateAction::make()
                 ->createAnother(false)
                 ->mutateFormDataUsing(function (array $data): array {
-                    $data['user_id'] = auth()->id();
+                    $data['icon'] = 'tabler-pig-money';
                     $data['slug'] = Str::slug($data['name']);
+                    $data['user_id'] = auth()->id();
 
                     return $data;
                 })
